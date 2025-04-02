@@ -5,4 +5,9 @@ df_continents = pd.read_csv("continents2.csv")
 
 df_merged = pd.merge(df_universities, df_continents, on="country_code", how="left")
 
-print(df_merged.head())
+missing = df_merged[df_merged["region"].isna()]
+
+# Save to a CSV file
+missing.to_csv("unmatched_country_codes.csv", index=False)
+
+print("Unmatched entries saved to unmatched_country_codes.csv")
